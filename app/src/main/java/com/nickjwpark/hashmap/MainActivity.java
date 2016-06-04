@@ -32,7 +32,9 @@ public class MainActivity extends AppCompatActivity {
                 String name = editTextName.getText().toString();
                 Double height_val = Double.parseDouble(editTextHeight.getText().toString());
                 height.put(name, height_val);
-                Log.d("debugging", name + "의 키는 " + height_val + "cm 입니다");
+                for (String key : height.keySet()) {
+                    Log.d("debugging", key + "의 키는 " + height.get(key) + "cm 입니다");
+                }
             }
         });
     }
