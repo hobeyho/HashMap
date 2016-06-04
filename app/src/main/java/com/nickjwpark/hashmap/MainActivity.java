@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
 
     Button btnAdd;
     EditText editTextName, editTextHeight, editTextWeight, editTextAge;
-    HashMap <String, double[]> height;
+    HashMap <String, HashMap<String, Double>> height;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         editTextWeight = (EditText) findViewById(R.id.editTextWeight);
         editTextAge = (EditText) findViewById(R.id.editTextAge);
 
-        height = new HashMap<String, double[]>();
+        height = new HashMap<String, HashMap<String, Double>>();
 
         btnAdd.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -37,12 +37,15 @@ public class MainActivity extends AppCompatActivity {
                 //나이는 원래 정수이지만 double 배열을 쓰기 때문에 double 로 사용해 주도록 하자
                 Double age_val = Double.parseDouble(editTextAge.getText().toString());
 
-                double [] values = {height_val, weight_val, age_val};
-                height.put(name, values);
+                HashMap<String, Double> student = new HashMap<String, Double>();
+                student.put("height", height_val);
+                student.put("weight", weight_val);
+                student.put("age", age_val);
+                height.put(name, student);
                 for (String key : height.keySet()) {
-                    Log.d("debugging", key + "의 키는 " + height.get(key)[0] + "cm,"+
-                            " 몸무게는 " + height.get(key)[1] + "kg,"+
-                            " 나이는 " + height.get(key)[2] + "살 입니다");
+                    Log.d("debugging", key + "의 키는 " + height.get(key).get("height") + "cm,"+
+                            " 몸무게는 " + height.get(key).get("weight") + "kg,"+
+                            " 나이는 " + height.get(key).get("age") + "살 입니다");
                 }
             }
         });
